@@ -1,0 +1,9 @@
+services:
+  api:
+    build:
+      context: .
+    image: cloud-engineering-api:latest
+    container_name: cloud-api-container
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
