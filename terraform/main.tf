@@ -8,8 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region  = var.aws_region
-  profile = "cloud-engineering"
+  region = var.aws_region
 }
 
 # --------------------------------------------------
@@ -116,10 +115,6 @@ resource "aws_route_table" "public" {
 # outbound access could use a NAT Gateway.
 # --------------------------------------------------
 
-# --------------------------------------------------
-# Private Route Table
-# --------------------------------------------------
-
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
 
@@ -214,7 +209,7 @@ resource "aws_instance" "terraform_lab" {
   instance_type               = var.instance_type
   subnet_id                   = aws_subnet.public.id
   vpc_security_group_ids      = [aws_security_group.ec2.id]
-  key_name                    = "cloud-engineering-lab-key"
+  key_name                    = var.key_name
   associate_public_ip_address = true
 
   tags = {
@@ -232,7 +227,7 @@ resource "aws_instance" "private_lab" {
   instance_type               = var.instance_type
   subnet_id                   = aws_subnet.private.id
   vpc_security_group_ids      = [aws_security_group.private_ec2.id]
-  key_name                    = "cloud-engineering-lab-key"
+  key_name                    = var.key_name
   associate_public_ip_address = false
 
   tags = {
