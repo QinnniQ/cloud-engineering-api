@@ -147,6 +147,17 @@ FastAPI exposes Swagger documentation at:
 https://api.nickcloud.dev/docs
 ```
 
+### Run application tests locally
+
+With Python 3.14 and a virtual environment, install the test dependencies and run the same API checks as CI:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
+```
+
+The tests exercise both public endpoints through FastAPI's test client and check that an unknown route returns 404. They do not require the live API or AWS.
+
 ---
 
 ## AWS Deployment
@@ -242,7 +253,7 @@ The pipeline currently checks:
 1. repository checkout
 2. Python setup
 3. dependency installation
-4. FastAPI import validation
+4. FastAPI endpoint tests
 5. Docker image build
 6. Terraform formatting
 7. Terraform initialization without a backend
@@ -335,6 +346,9 @@ This progression reflects the main engineering themes of the project: security, 
 |-- docker-compose.yml
 |-- main.py
 |-- requirements.txt
+|-- requirements-dev.txt
+|-- tests/
+|   `-- test_api.py
 |-- .dockerignore
 |-- .gitignore
 `-- README.md
