@@ -149,7 +149,7 @@ https://api.nickcloud.dev/docs
 
 ### Run application tests locally
 
-With Python 3.14 and a virtual environment, install the test dependencies and run the same API checks as CI:
+With Python 3.14.8 and a virtual environment, install the test dependencies and run the same API checks as CI:
 
 ```bash
 python -m pip install -r requirements-dev.txt
@@ -157,6 +157,8 @@ python -m pytest -q
 ```
 
 The tests exercise both public endpoints through FastAPI's test client and check that an unknown route returns 404. They do not require the live API or AWS.
+
+The direct Python dependencies and Docker base image are pinned so updates can be reviewed together with the test and image-build results. Transitive Python dependencies are still resolved when installed.
 
 ---
 

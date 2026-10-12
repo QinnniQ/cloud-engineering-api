@@ -98,7 +98,7 @@ Push / Pull Request
 GitHub Actions
         |
         +-- install Python dependencies
-        +-- validate FastAPI import
+        +-- test FastAPI HTTP responses
         +-- build Docker image
         +-- terraform fmt -check
         +-- terraform init -backend=false
