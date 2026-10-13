@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#09121b">
+    <meta name="description" content="A small FastAPI service with a cloud engineering story: HTTPS, containers, CI, and a separate Terraform networking lab.">
+    <meta property="og:title" content="NickCloud — Cloud Engineering API">
+    <meta property="og:description" content="A small API. A bigger picture. Explore the infrastructure and delivery work behind the service.">
+    <title>NickCloud — Cloud Engineering API</title>
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-glow" aria-hidden="true"></div>
+
+    <header class="site-header shell">
+      <a class="brand" href="/" aria-label="NickCloud home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-name">NICK<span>CLOUD</span><small>ENGINEERING LAB</small></span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#architecture">Architecture</a>
+        <a href="#endpoints">Endpoints</a>
+        <a class="nav-source" href="https://github.com/QinnniQ/cloud-engineering-api">Source <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero shell" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span> CLOUD ENGINEERING PROJECT <span class="eyebrow-index">/ 001</span></p>
+          <h1 id="hero-title">A small API.<br><span>A bigger picture.</span></h1>
+          <p class="hero-lead">A focused FastAPI service that makes the engineering around the endpoint visible: secure delivery, container boundaries, automated checks, and network design.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="/docs">Explore API docs <span aria-hidden="true">↗</span></a>
+            <a class="button button-outline" href="https://github.com/QinnniQ/cloud-engineering-api">View the source <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-meta" aria-label="Project technologies">
+            <span>FASTAPI</span><span>DOCKER</span><span>AWS</span><span>TERRAFORM</span>
+          </div>
+        </div>
+
+        <div class="route-card" aria-label="Live request path diagram">
+          <div class="route-card-header">
+            <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>request_path.map</span>
+            <span class="card-index">01 / 04</span>
+          </div>
+          <div class="route-card-body">
+            <div class="route-heading"><span class="route-heading-icon" aria-hidden="true">↗</span><span>FROM REQUEST<br>TO RESPONSE</span></div>
+            <div class="route-list">
+              <div class="route-step"><span class="route-number">01</span><span class="route-symbol" aria-hidden="true">◎</span><span><strong>Cloudflare DNS</strong><small>Domain routing</small></span></div>
+              <div class="route-step"><span class="route-number">02</span><span class="route-symbol" aria-hidden="true">◇</span><span><strong>Nginx + TLS</strong><small>Public HTTPS gateway</small></span></div>
+              <div class="route-step"><span class="route-number">03</span><span class="route-symbol" aria-hidden="true">▣</span><span><strong>Docker Compose</strong><small>Loopback-bound service</small></span></div>
+              <div class="route-step"><span class="route-number">04</span><span class="route-symbol" aria-hidden="true">{ }</span><span><strong>FastAPI</strong><small>JSON response</small></span></div>
+            </div>
+          </div>
+          <div class="route-card-footer"><span><i aria-hidden="true"></i> LIVE APPLICATION PATH</span><span>EU-CENTRAL-1</span></div>
+        </div>
+      </section>
+
+      <div class="section-divider shell" aria-hidden="true"><span>BUILD NOTES</span><span>↓ SCROLL TO EXPLORE</span></div>
+
+      <section class="architecture shell" id="architecture" aria-labelledby="architecture-title">
+        <div class="section-intro">
+          <p class="section-kicker">01 / THE SYSTEM</p>
+          <h2 id="architecture-title">The work is <em>around</em> the API.</h2>
+          <p>The application stays intentionally simple so the infrastructure choices are easy to inspect.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card"><span class="feature-number">01 / DELIVERY</span><span class="feature-glyph" aria-hidden="true">↗</span><h3>Secure public edge</h3><p>Nginx handles HTTPS while the application container listens only on the host loopback interface.</p><span class="feature-tag">NGINX · TLS</span></article>
+          <article class="feature-card"><span class="feature-number">02 / RELIABILITY</span><span class="feature-glyph" aria-hidden="true">◇</span><h3>Checks before release</h3><p>GitHub Actions tests HTTP responses, builds the image, and validates the Terraform configuration.</p><span class="feature-tag">TESTS · CI</span></article>
+          <article class="feature-card"><span class="feature-number">03 / NETWORKING LAB</span><span class="feature-glyph" aria-hidden="true">⌁</span><h3>Designed isolation</h3><p>A separate Terraform lab models public and private subnets, a jump host, and restricted SSH access.</p><span class="feature-tag">VPC · TERRAFORM</span></article>
+        </div>
+        <p class="architecture-note">The live API deployment and Terraform networking lab are separate project stages. <a href="https://github.com/QinnniQ/cloud-engineering-api/blob/main/docs/ARCHITECTURE.md">Read the architecture notes <span aria-hidden="true">↗</span></a></p>
+      </section>
+
+      <section class="endpoints-wrap" id="endpoints" aria-labelledby="endpoints-title">
+        <div class="shell endpoints-inner">
+          <div class="section-intro endpoints-intro"><p class="section-kicker">02 / EXPLORE</p><h2 id="endpoints-title">See it <em>respond.</em></h2><p>Open the JSON endpoints, or use the interactive Swagger documentation to inspect the API.</p></div>
+          <div class="endpoint-grid">
+            <a class="endpoint-card" href="/api"><span class="method">GET</span><span class="endpoint-path">/api</span><span class="endpoint-detail">Service response in JSON</span><span class="endpoint-arrow" aria-hidden="true">↗</span></a>
+            <a class="endpoint-card" href="/health"><span class="method">GET</span><span class="endpoint-path">/health</span><span class="endpoint-detail">Health check in JSON</span><span class="endpoint-arrow" aria-hidden="true">↗</span></a>
+            <a class="endpoint-card" href="/docs"><span class="method method-docs">OPEN</span><span class="endpoint-path">/docs</span><span class="endpoint-detail">Interactive API reference</span><span class="endpoint-arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer shell"><span>© NICKCLOUD / BUILT TO SHOW THE WORK</span><a href="https://github.com/QinnniQ/cloud-engineering-api">GITHUB REPOSITORY <span aria-hidden="true">↗</span></a></footer>
+  </body>
+</html>

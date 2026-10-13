@@ -14,6 +14,8 @@ The FastAPI application is intentionally small. The engineering work is in the i
 **Live API:** https://api.nickcloud.dev  
 **Swagger docs:** https://api.nickcloud.dev/docs
 
+The homepage presents the architecture in a browser. API clients can still request JSON from `/`, and `/api` always returns the same JSON response.
+
 ---
 
 ## Why This Project Exists
@@ -117,6 +119,8 @@ More detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 
 ### Root endpoint
 
+Browsers requesting `text/html` see the project landing page. Requests accepting JSON (including the default API client request) receive:
+
 ```http
 GET /
 ```
@@ -126,6 +130,8 @@ GET /
   "message": "Cloud Engineering API is running"
 }
 ```
+
+`GET /api` always returns this JSON response, including when opened in a browser.
 
 ### Health endpoint
 
@@ -156,7 +162,7 @@ python -m pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
-The tests exercise both public endpoints through FastAPI's test client and check that an unknown route returns 404. They do not require the live API or AWS.
+The tests exercise the JSON endpoints, browser landing page, stylesheet, and unknown-route response through FastAPI's test client. They do not require the live API or AWS.
 
 The direct Python dependencies and Docker base image are pinned so updates can be reviewed together with the test and image-build results. Transitive Python dependencies are still resolved when installed.
 
@@ -347,6 +353,10 @@ This progression reflects the main engineering themes of the project: security, 
 |-- Dockerfile
 |-- docker-compose.yml
 |-- main.py
+|-- static/
+|   |-- favicon.svg
+|   |-- index.html
+|   `-- styles.css
 |-- requirements.txt
 |-- requirements-dev.txt
 |-- tests/
