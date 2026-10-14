@@ -1,5 +1,7 @@
 # Cloud Engineering API
 
+[Nicholai Gay's AI engineering portfolio](https://profile.nickcloud.dev/) · [LinkedIn](https://www.linkedin.com/in/nicholai-gay-201905148/)
+
 [![CI](https://github.com/QinnniQ/cloud-engineering-api/actions/workflows/ci.yml/badge.svg)](https://github.com/QinnniQ/cloud-engineering-api/actions/workflows/ci.yml)
 [![AWS](https://img.shields.io/badge/AWS-EC2-orange)](#aws-deployment)
 [![Terraform](https://img.shields.io/badge/Terraform-IaC-844FBA)](#terraform-infrastructure-as-code)
